@@ -31,12 +31,10 @@ public class StudentController {
     public List<Student> readStudents(){ return studentService.readStudents(); }
 
 
-
     @RequestMapping(value = "update", method = RequestMethod.PUT)
     public String updateStudent(@RequestBody Student student){
         return studentService.updateStudent(student);
     }
-
 
 
     @RequestMapping(value = "delete", method = RequestMethod.DELETE)

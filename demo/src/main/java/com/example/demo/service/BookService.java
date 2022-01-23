@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Optional;
 import com.example.demo.model.Book;
+import com.example.demo.repositories.BookCollectionRepository;
 import com.example.demo.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,20 @@ import javax.transaction.Transactional;
 @Service
 public class BookService {
 
-    @Autowired
     private BookRepository bookRepository;
+    private BookCollectionRepository bookCollectionRepository;
+
+    @Autowired
+    public BookService(BookRepository bookRepository, BookCollectionRepository bookCollectionRepository) {
+        this.bookRepository = bookRepository;
+        this.bookCollectionRepository = bookCollectionRepository;
+    }
 
     public List<Book> readBooks(){
         return bookRepository.findAll();
     }
+
+    public List<Book> readBooksCollection(){ return bookCollectionRepository.booksInCollection(); }
 
 
     @Transactional

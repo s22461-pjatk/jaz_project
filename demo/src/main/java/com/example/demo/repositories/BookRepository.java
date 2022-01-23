@@ -18,4 +18,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
         return null;
     }
 
+    @Query(value = "select * from book where book_id not in hire", nativeQuery = true)
+    public List<Book> booksInCollection();
+
 }

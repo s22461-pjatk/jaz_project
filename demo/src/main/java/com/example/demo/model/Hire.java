@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 public class Hire {
@@ -13,10 +14,17 @@ public class Hire {
     //@GeneratedValue(strategy = GenerationType.AUTO)
     private int hire_id;
     private int book_id;
-    private int reader_id;
-    private String date_hire;
-    private String date_delivery;
+    private int index_number;
+    private Date date_hire;
+    private Date date_delivery;
 
+    public int getIndex_number() {
+        return index_number;
+    }
+
+    public void setIndex_number(int index_number) {
+        this.index_number = index_number;
+    }
 
     public int getHire_id() {
         return hire_id;
@@ -34,27 +42,20 @@ public class Hire {
         this.book_id = book_id;
     }
 
-    public int getReader_id() {
-        return reader_id;
-    }
 
-    public void setReader_id(int reader_id) {
-        this.reader_id = reader_id;
-    }
-
-    public String getDate_hire() {
+    public Date getDate_hire() {
         return date_hire;
     }
 
-    public void setDate_hire(String date_hire) {
+    public void setDate_hire(Date date_hire) {
         this.date_hire = date_hire;
     }
 
-    public String getDate_delivery() {
+    public Date getDate_delivery() {
         return date_delivery;
     }
 
-    public void setDate_delivery(String date_delivery) {
+    public void setDate_delivery(Date date_delivery) {
         this.date_delivery = date_delivery;
     }
 }

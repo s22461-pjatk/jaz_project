@@ -17,7 +17,7 @@ public interface HireRepository extends JpaRepository<Hire, Integer> {
         return null;
     }
 
-    @Query(value = "select * from hire where reader_id = ?1", nativeQuery = true)
+    @Query(value = "select * from hire where index_number = ?1", nativeQuery = true)
     public List<Hire> findStudentHiresById(int index_number);
 
 }

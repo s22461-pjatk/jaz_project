@@ -1,15 +1,19 @@
 package com.example.demo.service;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.model.Book;
 import com.example.demo.model.Hire;
+import com.example.demo.repositories.BookCollectionRepository;
 import com.example.demo.repositories.BookRepository;
 import com.example.demo.repositories.HireRepository;
+import com.example.demo.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
@@ -17,11 +21,22 @@ import javax.transaction.Transactional;
 public class HireService {
 
     private HireRepository hireRepository;
+    private BookRepository bookRepository;
+    private StudentRepository studentRepository;
+    private BookCollectionRepository bookCollectionRepository;
+
 
     @Autowired
-    public HireService(HireRepository hireRepository) {
+    public HireService(HireRepository hireRepository, BookRepository bookRepository,
+                       StudentRepository studentRepository, BookCollectionRepository bookCollectionRepository) {
         this.hireRepository = hireRepository;
+        this.bookRepository = bookRepository;
+        this.studentRepository = studentRepository;
+        this.bookCollectionRepository = bookCollectionRepository;
+
+
     }
+
 
     public List<Hire> readHires(){
         return hireRepository.findAll();
@@ -32,18 +47,27 @@ public class HireService {
 
     @Transactional
     public String createHire(Hire hire){
-        try {
-            if (!hireRepository.existsById(hire.getHire_id())){
-                hire.setHire_id(null == hireRepository.findMaxId()? hire.getHire_id() : hireRepository.findMaxId() + 1);
-                hireRepository.save(hire);
-                return "Hire record created successfully.";
-            }else {
-                return "Hire already exists in the database.";
-            }
-        }catch (Exception e){
-            throw e;
+        if ( studentRepository.existsById(hire.getIndex_number())
+        & bookRepository.existsById(hire.getBook_id())
+        & hire.getHire_id() == 0
+        ){
+
+            Date hire_date = new java.sql.Date(System.currentTimeMillis());
+            Date delivery_date = new java.sql.Date(System.currentTimeMillis() + 14*24*3600*1000);
+
+            hire.setDate_hire(hire_date);
+            hire.setDate_delivery(delivery_date);
+
+            hireRepository.save(hire);
+
+            return "Hire record created successfully.";
         }
+
+        return "Hire loan has not been added.";
+
+
     }
+
 
 
 
