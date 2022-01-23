@@ -11,37 +11,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+@RequestMapping("api/book")
 @RestController
 public class BookController {
 
     @Autowired
     private BookService bookService;
 
+    @RequestMapping(value = "create", method = RequestMethod.POST)
+     public String createBook(@RequestBody Book book){ return bookService.createBook(book); }
 
-    @RequestMapping(value = "createbook", method = RequestMethod.POST)
-     public String createBook(@RequestBody Book book){
-        return bookService.createBook(book);
-    }
+    @RequestMapping(value = "read", method = RequestMethod.GET)
+    public List<Book> readBooks(){ return bookService.readBooks();}
 
+    @RequestMapping(value = "update", method = RequestMethod.PUT)
+    public String updateBook(@RequestBody Book book){ return bookService.updateBook(book); }
 
-    @RequestMapping(value = "readbooks", method = RequestMethod.GET)
-    public List<Book> readBooks(){
-        return bookService.readBooks();
-
-    }
-
-
-    @RequestMapping(value = "deletebook", method = RequestMethod.DELETE)
-    public String deleteBook(@RequestBody Book book){
-        return bookService.deleteBook(book);
-    }
+    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    public String deleteBook(@RequestBody Book book){ return bookService.deleteBook(book); }
 
 
 }
-/**
- @RequestMapping(value = "updatebook", method = RequestMethod.PUT)
- public String updateBook(@RequestBody Book book){
- return bookService.updateBook(book);
- }
- **/
 

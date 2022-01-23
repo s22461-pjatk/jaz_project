@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Hire;
 import com.example.demo.model.Student;
+import com.example.demo.repositories.HireRepository;
 import com.example.demo.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,8 +13,8 @@ import java.util.List;
 @Service
 public class StudentService {
 
-    @Autowired
     private StudentRepository studentRepository;
+
 
     @Transactional
     public String createStudent(Student student){
@@ -29,19 +31,27 @@ public class StudentService {
         }
     }
 
+
     public List<Student> readStudents(){
         return studentRepository.findAll();
     }
 
+
+
     @Transactional
     public String updateStudent(Student student){
-        if (studentRepository.existsByEmail(student.getEmail())){
+        if (studentRepository.existsByEmail(student.getEmail())
+        ){
             try {
                 List<Student> students = studentRepository.findByEmail(student.getEmail());
+
                 students.stream().forEach(s -> {
                     Student studentToBeUpdate = studentRepository.findById(s.getIndex_number()).get();
-                    studentToBeUpdate.setName(student.getName());
-                    studentToBeUpdate.setEmail(student.getEmail());
+
+                    if (student.getForename() != null){ studentToBeUpdate.setForename(student.getForename());
+                    }
+                    if (student.getName() != null){ studentToBeUpdate.setName(student.getName());
+                    }
                     studentRepository.save(studentToBeUpdate);
                 });
                 return "Student record updated.";
@@ -52,6 +62,7 @@ public class StudentService {
             return "Student does not exists in the database.";
         }
     }
+
 
     @Transactional
     public String deleteStudent(Student student){

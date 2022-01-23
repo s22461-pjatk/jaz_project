@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import com.example.demo.model.Book;
 import com.example.demo.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +36,39 @@ public class BookService {
     }
 
 
+    @Transactional
+    public String updateBook(Book book){
+        if (bookRepository.existsById(book.getBook_id())){
+            try {
+                Optional<Book> books = bookRepository.findById(book.getBook_id());
+                books.stream().forEach(s -> {
+                Book bookToBeUpdate = bookRepository.findById(s.getBook_id()).get();
+
+                if (book.getTitle() != null){
+                    bookToBeUpdate.setTitle(book.getTitle());}
+                if (book.getAuthor() != null){
+                    bookToBeUpdate.setAuthor(book.getAuthor());}
+
+                if (book.getRelase() != 0) {
+                    bookToBeUpdate.setRelase(book.getRelase());}
+
+                    bookRepository.save(bookToBeUpdate);
+                });
+                return "book record updated.";
+            }catch (Exception e){
+                throw e;
+            }
+        }else {
+            return "book does not exists in the database.";
+        }
+    }
+
 
     @Transactional
     public String deleteBook(Book book) {
         if (bookRepository.existsById(book.getBook_id())) {
             try {
-                List<Book> books = bookRepository.findById(book.getBook_id());
+                Optional<Book> books = bookRepository.findById(book.getBook_id());
                 books.stream().forEach(s -> {
                     bookRepository.delete(s);
                 });
@@ -56,28 +82,3 @@ public class BookService {
         }
     }
 }
-
-
-
-/**
- @Transactional
- public String updateBook(Book book){
- if (bookRepository.existsById(book.getBook_id())){
- try {
- List<Book> books = bookRepository.findById(book.getBook_id());
- books.stream().forEach(s -> {
- Book bookToBeUpdate = bookRepository.findById(s.getBook_id()).get();
- bookToBeUpdate.setTitle(book.getTitle());
- bookToBeUpdate.setAuthor(book.getAuthor());
- bookToBeUpdate.setRelase(book.getRelase());
- bookRepository.save(bookToBeUpdate);
- });
- return "book record updated.";
- }catch (Exception e){
- throw e;
- }
- }else {
- return "book does not exists in the database.";
- }
- }
- **/

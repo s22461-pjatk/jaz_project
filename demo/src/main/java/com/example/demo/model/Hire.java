@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Hire {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private int hire_id;
     private int book_id;
     private int reader_id;

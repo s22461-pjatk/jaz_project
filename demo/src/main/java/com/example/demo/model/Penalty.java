@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Penalty {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private int hire_id;
     private float cash_penalty;
 
