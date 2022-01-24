@@ -65,12 +65,3 @@ public class Book {
     }
 
 }
-/**
- *     public Book() {}
- *     public Book(int book_id, String title, String author, String relase) {
- *         this.book_id = book_id;
- *         this.title = title;
- *         this.author = author;
- *         this.relase = relase;
- *     }
- */

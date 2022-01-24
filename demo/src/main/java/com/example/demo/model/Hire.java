@@ -58,12 +58,3 @@ public class Hire {
     }
 }
 
-
-/**
- *     public Hire() {}
- *     public Hire(int idBook, int idReader) {
- *         this.idBook = idBook;
- *         this.idReader = idReader;
- *
- *     }
- */

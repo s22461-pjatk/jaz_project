@@ -54,7 +54,7 @@ public class BookService {
             }else {
                 return "book already exists in the database.";
             }
-        }catch (Exception e){
+        } catch (Exception e){
             throw e;
         }
     }

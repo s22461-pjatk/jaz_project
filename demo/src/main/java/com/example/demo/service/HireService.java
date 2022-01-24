@@ -38,9 +38,7 @@ public class HireService {
     }
 
 
-    public List<Hire> readHires(){
-        return hireRepository.findAll();
-    }
+    public List<Hire> readHires(){ return hireRepository.findAll(); }
 
     public List<Hire> readStudentHires(int index_number){return hireRepository.findStudentHiresById(index_number);}
 
