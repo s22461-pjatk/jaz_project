@@ -19,7 +19,7 @@ public interface BookCollectionRepository extends JpaRepository<Book, Integer> {
     @Query(value = "select * from book where book_id not in (select book_id from hire)", nativeQuery = true)
     public List<Book> booksInCollection();
 
-    @Query(value = "select * from book where book_id not in (select book_id from hire) and title like %?1", nativeQuery = true)
+    @Query(value = "select * from book where book_id not in (select book_id from hire) and title like ?1", nativeQuery = true)
     public List<Book> booksInCollectionById(String title);
 
 }

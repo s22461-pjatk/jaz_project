@@ -30,6 +30,15 @@ public class BookService {
 
     public List<Book> readHiresBooks(){ return bookCollectionRepository.hireBooks(); }
 
+    public List<Book> searchBooksGet(String title, String author){
+        return bookRepository.searchBook(title, author); }
+
+    public List<Book> searchBooksPost(Book book){
+        String title = (null == book.getTitle()? "" : book.getTitle());
+        String author = (null == book.getAuthor()? "" : book.getAuthor());
+
+        return bookRepository.searchBook(title, author); }
+
 
     @Transactional
     public String createBook(Book book){

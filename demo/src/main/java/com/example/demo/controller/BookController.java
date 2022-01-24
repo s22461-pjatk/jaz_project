@@ -3,13 +3,9 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Book;
 import com.example.demo.service.BookService;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
-
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 
 @RequestMapping("api/book")
@@ -38,6 +34,13 @@ public class BookController {
     @RequestMapping(value = "hires", method = RequestMethod.GET)
     public List<Book> hiresBooks() { return bookService.readHiresBooks(); }
 
+    @RequestMapping(value = "search/{title}/{author}", method = RequestMethod.GET)
+    public List<Book> hiresBooks(@PathVariable("title") String title, @PathVariable("author") String author) {
+        return bookService.searchBooksGet(title, author); }
 
+
+    @RequestMapping(value = "search", method = RequestMethod.POST)
+    public List<Book> hiresBooks(@RequestBody Book book) {
+        return bookService.searchBooksPost(book); }
 
 }
