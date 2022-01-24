@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.Hire;
 import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;

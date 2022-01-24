@@ -28,19 +28,5 @@ public class BookController {
     @RequestMapping(value = "delete", method = RequestMethod.DELETE)
     public String deleteBook(@RequestBody Book book) { return bookService.deleteBook(book); }
 
-    @RequestMapping(value = "collection", method = RequestMethod.GET)
-    public List<Book> booksCollection() { return bookService.readBooksCollection(); }
-
-    @RequestMapping(value = "hires", method = RequestMethod.GET)
-    public List<Book> hiresBooks() { return bookService.readHiresBooks(); }
-
-    @RequestMapping(value = "search/{title}/{author}", method = RequestMethod.GET)
-    public List<Book> hiresBooks(@PathVariable("title") String title, @PathVariable("author") String author) {
-        return bookService.searchBooksGet(title, author); }
-
-
-    @RequestMapping(value = "search", method = RequestMethod.POST)
-    public List<Book> hiresBooks(@RequestBody Book book) {
-        return bookService.searchBooksPost(book); }
 
 }

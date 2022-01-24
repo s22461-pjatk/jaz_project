@@ -28,6 +28,9 @@ public class BookService {
 
     public List<Book> readBooksCollection(){ return bookCollectionRepository.booksInCollection(); }
 
+    public List<List> readCollectionByTitle(){ return bookCollectionRepository.booksCollectionGroupByTitle(); }
+
+
     public List<Book> readHiresBooks(){ return bookCollectionRepository.hireBooks(); }
 
     public List<Book> searchBooksGet(String title, String author){
