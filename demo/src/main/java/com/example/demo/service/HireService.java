@@ -51,12 +51,21 @@ public class HireService {
         & bookRepository.existsById(hire.getBook_id())
         & hire.getHire_id() == 0
         ){
+            SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
 
-            Date hire_date = new java.sql.Date(System.currentTimeMillis());
-            Date delivery_date = new java.sql.Date(System.currentTimeMillis() + 14*24*3600*1000);
+            //& bookCollectionRepository.booksInCollection().get()
+            String hire_date = date_format.format(System.currentTimeMillis());
+            String delivery_date = date_format.format(System.currentTimeMillis() + 14*24*3600*1000);
 
-            hire.setDate_hire(hire_date);
-            hire.setDate_delivery(delivery_date);
+
+            hire.setDate_hire(Date.valueOf(hire_date));
+            System.out.println(Date.valueOf(hire_date));
+
+            hire.setDate_delivery(Date.valueOf(delivery_date));
+
+            System.out.println(hireRepository.findAll());
+
+            hire.setHire_id(null == hireRepository.findMaxId()? 1 : hireRepository.findMaxId() + 1);
 
             hireRepository.save(hire);
 

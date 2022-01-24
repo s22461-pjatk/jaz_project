@@ -28,13 +28,16 @@ public class BookService {
 
     public List<Book> readBooksCollection(){ return bookCollectionRepository.booksInCollection(); }
 
+    public List<Book> readHiresBooks(){ return bookCollectionRepository.hireBooks(); }
+
 
     @Transactional
     public String createBook(Book book){
         try {
             if (!bookRepository.existsById(book.getBook_id())){
-                book.setBook_id(null == bookRepository.findMaxId()? book.getBook_id() : bookRepository.findMaxId() + 1);
+                book.setBook_id(null == bookRepository.findMaxId()? 1 : bookRepository.findMaxId() + 1);
                 bookRepository.save(book);
+
                 return "book record created successfully.";
             }else {
                 return "book already exists in the database.";

@@ -35,5 +35,9 @@ public class BookController {
     @RequestMapping(value = "collection", method = RequestMethod.GET)
     public List<Book> booksCollection() { return bookService.readBooksCollection(); }
 
+    @RequestMapping(value = "hires", method = RequestMethod.GET)
+    public List<Book> hiresBooks() { return bookService.readHiresBooks(); }
+
+
 
 }

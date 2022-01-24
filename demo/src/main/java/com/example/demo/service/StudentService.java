@@ -22,7 +22,7 @@ public class StudentService {
     public String createStudent(Student student){
         try {
             if (!studentRepository.existsByEmail(student.getEmail())){
-                student.setIndex_number(null == studentRepository.findMaxId()? 0 : studentRepository.findMaxId() + 1);
+                student.setIndex_number(null == studentRepository.findMaxId()? 1 : studentRepository.findMaxId() + 1);
                 studentRepository.save(student);
                 return "Student record created successfully.";
             }else {

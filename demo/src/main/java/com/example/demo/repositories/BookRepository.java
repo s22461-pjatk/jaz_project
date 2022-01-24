@@ -13,10 +13,10 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     public boolean existsById(int book_id);
 
-    @Query("select max(s.book_id) from book s")
-    public default Integer findMaxId() {
-        return null;
-    }
+
+    @Query(value = "select max(s.book_id) from book s", nativeQuery = true)
+    public Integer findMaxId();
+
 
     @Query(value = "select * from book where book_id not in hire", nativeQuery = true)
     public List<Book> booksInCollection();
